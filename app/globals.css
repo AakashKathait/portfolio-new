@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --color-background: #eafff7;   /* Mint cream */
+  --color-primary: #00b894;      /* Vivid mint */
+  --color-accent: #bfa43a;       /* Goldenrod yellow */
+  --color-surface: #ffffff;      /* White */
+  --color-text: #222f3e;         /* Deep blue-gray */
+}
+
+[data-theme="dark"] {
+  --color-background: #101a17;   /* Even deeper forest green */
+  --color-primary: #2e6e3e;      /* Darker moss green */
+  --color-accent: #bfa43a;       /* Goldenrod yellow */
+  --color-surface: #16241c;      /* Very dark green */
+  --color-text: #cde7c5;         /* Muted pale green */
+}
+
+html[data-theme="light"] body {
+  background-color: var(--color-background);
+  background-image:
+    url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/w8AAn8B9p6y7wAAAABJRU5ErkJggg=='); /* Light noise (very subtle) */
+  background-repeat: repeat;
+  background-size: auto;
+}
+html[data-theme="dark"] body {
+  background-color: var(--color-background);
+  background-image:
+    url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8z8AAAgMBAp6y7wAAAABJRU5ErkJggg=='); /* Darker noise */
+  background-repeat: repeat;
+  background-size: auto;
+  }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  background: var(--color-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 6px;
+  border: 2px solid var(--color-surface);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+@keyframes float-slow { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-16px);} }
+@keyframes float-medium { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-24px);} }
+@keyframes float-fast { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-32px);} }
+.animate-float-slow{animation:float-slow 7s ease-in-out infinite;}
+.animate-float-medium{animation:float-medium 5s ease-in-out infinite;}
+.animate-float-fast{animation:float-fast 3.5s ease-in-out infinite;}
+
+@keyframes gradient-wave { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+.animate-gradient-wave{animation:gradient-wave 8s ease-in-out infinite;}
+
+@keyframes aurora1 { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-18px) scaleX(1.05);} }
+@keyframes aurora2 { 0%,100%{transform:translateY(0);} 50%{transform:translateY(12px) scaleX(0.97);} }
+.animate-aurora1{animation:aurora1 9s ease-in-out infinite;}
+.animate-aurora2{animation:aurora2 11s ease-in-out infinite;}
+
+@keyframes constellation-dot { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+@keyframes constellation-line { 0%,100%{opacity:0.18;} 50%{opacity:0.28;} }
+.animate-constellation-dot{animation:constellation-dot 4s ease-in-out infinite;}
+.animate-constellation-line{animation:constellation-line 6s ease-in-out infinite;}
+
+@keyframes geo1 { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-18px);} }
+@keyframes geo2 { 0%,100%{transform:translateY(0);} 50%{transform:translateY(12px);} }
+@keyframes geo3 { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-10px) rotate(8deg);} }
+@keyframes geo4 { 0%,100%{transform:rotate(0deg);} 50%{transform:rotate(30deg);} }
+@keyframes geo5 { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);} }
+.animate-geo1{animation:geo1 7s ease-in-out infinite;}
+.animate-geo2{animation:geo2 6s ease-in-out infinite;}
+.animate-geo3{animation:geo3 8s ease-in-out infinite;}
+.animate-geo4{animation:geo4 10s linear infinite;}
+.animate-geo5{animation:geo5 5.5s ease-in-out infinite;}
+
+@keyframes wave1 { 0%,100%{transform:translateX(0);} 50%{transform:translateX(30px);} }
+@keyframes wave2 { 0%,100%{transform:translateX(0);} 50%{transform:translateX(-40px);} }
+.animate-wave1{animation:wave1 8s ease-in-out infinite;}
+.animate-wave2{animation:wave2 10s ease-in-out infinite;}
+@keyframes bubble1 { 0%{transform:translateY(0) scale(1);} 80%{opacity:1;} 100%{transform:translateY(-400px) scale(1.1);opacity:0;} }
+@keyframes bubble2 { 0%{transform:translateY(0) scale(1);} 80%{opacity:1;} 100%{transform:translateY(-380px) scale(1.05);opacity:0;} }
+@keyframes bubble3 { 0%{transform:translateY(0) scale(1);} 80%{opacity:1;} 100%{transform:translateY(-430px) scale(1.15);opacity:0;} }
+@keyframes bubble4 { 0%{transform:translateY(0) scale(1);} 80%{opacity:1;} 100%{transform:translateY(-360px) scale(1.08);opacity:0;} }
+@keyframes bubble5 { 0%{transform:translateY(0) scale(1);} 80%{opacity:1;} 100%{transform:translateY(-410px) scale(1.12);opacity:0;} }
+.animate-bubble1{animation:bubble1 7s linear infinite;}
+.animate-bubble2{animation:bubble2 6s linear infinite;}
+.animate-bubble3{animation:bubble3 8s linear infinite;}
+.animate-bubble4{animation:bubble4 5.5s linear infinite;}
+.animate-bubble5{animation:bubble5 7.5s linear infinite;}
+
+@keyframes water-wave1 { 0%,100%{transform:translateX(0) translateY(0);} 25%{transform:translateX(20px) translateY(-6px);} 50%{transform:translateX(0) translateY(0);} 75%{transform:translateX(-20px) translateY(6px);} }
+@keyframes water-wave2 { 0%,100%{transform:translateX(0) translateY(0);} 25%{transform:translateX(-18px) translateY(8px);} 50%{transform:translateX(0) translateY(0);} 75%{transform:translateX(18px) translateY(-8px);} }
+.animate-water-wave1{animation:water-wave1 8s ease-in-out infinite;}
+.animate-water-wave2{animation:water-wave2 10s ease-in-out infinite;}
+@keyframes water-wave3 { 0%,100%{transform:translateX(0) translateY(0);} 25%{transform:translateX(12px) translateY(-10px);} 50%{transform:translateX(0) translateY(0);} 75%{transform:translateX(-12px) translateY(10px);} }
+.animate-water-wave3{animation:water-wave3 12s ease-in-out infinite;}
+@keyframes bubble6 { 0%{transform:translateY(0) scale(1);} 80%{opacity:1;} 100%{transform:translateY(-390px) scale(1.09);opacity:0;} }
+@keyframes bubble7 { 0%{transform:translateY(0) scale(1);} 80%{opacity:1;} 100%{transform:translateY(-420px) scale(1.13);opacity:0;} }
+.animate-bubble6{animation:bubble6 6.5s linear infinite;}
+.animate-bubble7{animation:bubble7 7.2s linear infinite;}
