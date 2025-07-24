@@ -4,14 +4,31 @@ import React, { useState } from "react";
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [validationError, setValidationError] = useState<string | null>(null);
+
+  const validateEmail = (email: string) => {
+    // Simple email regex
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setValidationError(null); // Clear error on change
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Client-side validation
+    if (!form.email.trim() || !form.message.trim()) {
+      setValidationError("Email and message are required.");
+      return;
+    }
+    if (!validateEmail(form.email)) {
+      setValidationError("Please enter a valid email address.");
+      return;
+    }
     setStatus("sending");
+    setValidationError(null);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -40,13 +57,12 @@ const ContactSection = () => {
             name="name"
             value={form.name}
             onChange={handleChange}
-            required
             className="px-4 py-2 rounded-lg border border-[var(--color-primary)] bg-[var(--color-background)] text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition"
             autoComplete="name"
           />
         </label>
         <label className="flex flex-col gap-1 text-[var(--color-text)] font-medium">
-          Email
+          Email <span className="text-red-500">*</span>
           <input
             type="email"
             name="email"
@@ -58,7 +74,7 @@ const ContactSection = () => {
           />
         </label>
         <label className="flex flex-col gap-1 text-[var(--color-text)] font-medium">
-          Message
+          Message <span className="text-red-500">*</span>
           <textarea
             name="message"
             value={form.message}
@@ -68,6 +84,9 @@ const ContactSection = () => {
             className="px-4 py-2 rounded-lg border border-[var(--color-primary)] bg-[var(--color-background)] text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition resize-none"
           />
         </label>
+        {validationError && (
+          <p className="text-red-600 font-medium text-center mt-2">{validationError}</p>
+        )}
         <button
           type="submit"
           disabled={status === "sending"}
